@@ -121,3 +121,12 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
 STATIC_URL = '/static/'
+
+
+RSS = {
+
+    'elmundo' : 'http://estaticos.elmundo.es/elmundo/rss/portada.xml',
+    'elpais' : 'http://ep00.epimg.net/rss/tags/ultimas_noticias.xml',
+    'abc' : 'http://www.abc.es/rss/feeds/abcPortada.xml',
+
+}
