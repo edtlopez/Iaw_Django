@@ -1,16 +1,14 @@
-from django.shortcuts import render
-# Create your views here.
-from django.http import HttpResponse
-from django.shortcuts import render,loader
-from buscador.models import Portada, Fecha
+from django.shortcuts import get_object_or_404, render
+from django.http import HttpResponseRedirect, HttpResponse
+from django.core.urlresolvers import reverse
+from django.views import generic
+from django.template import loader
+from .models import Fecha, Portada
 
 
-def buscador_index(request):
-	template = loader.get_template('buscador/index.html')
-	return HttpResponse(template.render(request))
+class IndexView(generic.ListView):
+	template_name = 'buscador/base.html'
 
-
-
-def buscador_noticias(request,año,mes,dia):
-	template = loader.get_template('buscador/resultados.html')
-	return HttpResponse(template.render(request))
+	def get_queryset(self):
+		 template = loader.get_template('buscador/base.html')
+		 return HttpResponse(template.render())

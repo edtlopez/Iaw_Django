@@ -25,8 +25,10 @@ class Act_Database :
 			salida = True
 		return salida
 
-	def __ID_Fecha (self):
-		
+	del __id_fecha (self):
+		return Fecha.
+
+
 
 	def Update (self):
 		
@@ -34,27 +36,13 @@ class Act_Database :
 			A = feedparser.parse(RSS[rss])
 			for Noticia in A['items']:
 				iden = Noticia['id']
-				dt = datetime.datetime(Noticia['published_parsed'][0],A['items'][0]['published_parsed'][1],A['items'][0]['published_parsed'][2],A['items'][0]['published_parsed'][3],A['items'][0]['published_parsed'][4],0)
+				dt = datetime.datetime(Noticia['published_parsed'])
 				if not (__Exist_fecha(dt)) and not( __Exist_Noticia(iden)):
+					Fe = Fecha (fecha = dt, num_busquedas = 0)
+					Fe.save()
+					Po = Portada (	ponom = str(Noticia['title']), 	editorial = str(RSS[rss]),url = str(Noticia['link']),ref = str(Noticia['id']), fk_fecha = )
+					Po.save()
 					
-					Po = (
-
-						ponom = str(Noticia['title']), 
-						editorial = str(RSS[rss])
-						url = str(Noticia['link'])
-						ref = str(Noticia['id'])
-
-
-					)
-
-
-		
-		for Noticias_Dia in A['items']:
-
-
-
-
-
 	def search (self,url,edi):
 		rss = feedparser.parse(url)
 		for titular in rss['items']:

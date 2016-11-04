@@ -30,6 +30,8 @@ ALLOWED_HOSTS = []
 
 # Application definition
 
+app_name = 'buscador'
+
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -51,6 +53,8 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+
 
 ROOT_URLCONF = 'iaw.urls'
 
@@ -83,6 +87,16 @@ DATABASES = {
     }
 }
 
+#DATABASES = {
+#    'default': {
+#        'ENGINE': 'mysql.connector.django', 
+#        'NAME': 'django',
+#        'USER': 'django',
+#        'PASSWORD': 'django',
+#        'HOST': '192.168.1.200',   # Or an IP Address that your DB is hosted on
+#        'PORT': '3306',
+#    }
+#}
 
 # Password validation
 # https://docs.djangoproject.com/en/1.10/ref/settings/#auth-password-validators
