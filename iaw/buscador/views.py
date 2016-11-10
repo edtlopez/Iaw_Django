@@ -3,19 +3,24 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.core.urlresolvers import reverse
 from django.views import generic
 from django.template import loader
-from .models import Fecha, Portada
-from .forms import search_noticia
+from buscador.models import Fecha, Portada
+from buscador.forms import search_noticia
 
 
 class IndexView(generic.ListView):
-	template_name = 'buscador/base.html'
 
-	def Buscador(self):
-		 template = loader.get_template('buscador/formulario.html')
-		 return HttpResponse(template.render())
+	def Buscador(request):
+		if request.method == "POST":
+			form = search_noticia(request.POST)
+			if form.is_valid():
+				Año = form.cleaned_data['año']
+				Mes = form.cleaned_data['mes']
+				Dia = form.cleaned_data['dia']
+				return HttpResponseRedirect('/resultado/')	
+		else:
+			form = search_noticia()
+		return render(request, 'buscador/formulario.html', {'form': form})
 
-	def search(request):
-		form = search_noticia.buscar_noticias(año,mes,dia)
+	def Resultado_Busqueda(request):
 		
-		
-		return render(request, 'buscador/search_resultados.html', {'form': form})
+		return render(request, 'buscador/resultado.html', {'form': form})

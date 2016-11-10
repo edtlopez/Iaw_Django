@@ -54,6 +54,12 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+#PROJECT_PATH = os.path.split(os.path.abspath(os.path.dirname(__file__)))[0]
+
+#TEMPLATE_DIRS = (
+#    os.path.join(PROJECT_PATH,'buscador/templates/buscador'),
+#)
+
 
 
 ROOT_URLCONF = 'iaw.urls'

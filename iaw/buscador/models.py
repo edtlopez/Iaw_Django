@@ -1,5 +1,4 @@
 from django.db import models
-
 # Create your models here.
 
 class Fecha (models.Model):
@@ -13,4 +12,5 @@ class Portada (models.Model):
 	url = models.CharField(max_length=50)
 	fk_fecha = models.ForeignKey(Fecha,on_delete=models.CASCADE)
 	
+
 
