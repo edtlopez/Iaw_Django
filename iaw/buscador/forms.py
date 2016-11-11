@@ -1,5 +1,5 @@
 from django import forms
-from buscador.models import Fecha, Portada
+from buscador.models import  Portada
 
 class search_noticia(forms.ModelForm):
 	Año = forms.CharField(label='Año', max_length=4)
@@ -7,5 +7,5 @@ class search_noticia(forms.ModelForm):
 	Dia = forms.CharField(label='Dia', max_length=2)
 	
 	class Meta:
-		model = Fecha
+		model = Portada
 		fields = ['Dia', 'Mes', 'Año']	
