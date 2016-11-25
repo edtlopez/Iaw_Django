@@ -5,6 +5,7 @@ from django.views import generic
 from django.template import loader
 from buscador.models import Portada
 from buscador.forms import search_noticia
+import datetime
 
 
 class IndexView(generic.ListView):
@@ -12,11 +13,14 @@ class IndexView(generic.ListView):
 	def Buscador(request):
 		if request.method == "POST":
 			form = search_noticia(request.POST)
-			print (request.POST)
-			return redirect(Resultado_Busqueda(Año,Mes,Dia))	
+			if form.is_valid():
+				Año = request.POST["Año"]
+				Mes = request.POST["Mes"]
+				Dia = request.POST["Dia"]
+				
+				
+			return 	render('buscador/resultado.html')
 		else:
 			form = search_noticia()
 		return render(request, 'buscador/formulario.html', {'form': form})
 
-	def Resultado_Busqueda(request):		
-		return render(request, 'buscador/resultado.html')
