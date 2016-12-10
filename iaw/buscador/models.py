@@ -1,4 +1,5 @@
 from django.db import models
+import datetime
 # Create your models here.
 
 
@@ -10,4 +11,4 @@ class Portada (models.Model):
 	fecha = models.DateTimeField()
 	
 
-
+		

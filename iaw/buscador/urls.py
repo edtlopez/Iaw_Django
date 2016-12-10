@@ -3,6 +3,6 @@ from . import views
 from buscador.views import IndexView
 
 urlpatterns = [
-        url(r'^$', IndexView.Buscador,),
-        url(r'^resultado/$', IndexView.Resultado_Busqueda),        
+        url(r'^$', IndexView.Buscador, name="Buscador"),
+        url(r'^resultado/$', IndexView.Resultado),        
 ]
