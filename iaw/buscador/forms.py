@@ -1,11 +1,15 @@
 from django import forms
-from buscador.models import  Portada
+from buscador.models import  Periodico, Articulo
 
-class search_noticia_form(forms.ModelForm):
-	Año = forms.CharField(label='Año', max_length=4)
-	Mes = forms.CharField(label='Mes', max_length=2)
-	Dia = forms.CharField(label='Dia', max_length=2)
+
+class busqueda_avanzada (forms.ModelForm):
+	
+	Fecha = forms.DateTimeField()
+	Periodico = forms.CharField(label='Periodico', max_length=2)
+	Categoria = forms.CharField(label='Categoria', max_length=2)
+	Titulo = forms.CharField(label='Titulo', max_length=2)	
 	
 	class Meta:
-		model = Portada
-		fields = ['Dia', 'Mes', 'Año']	
+		model = Articulo
+		fields = ['Fecha','Periodico','Categoria','Titulo']	
+	
