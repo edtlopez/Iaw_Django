@@ -41,7 +41,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'buscador',
     'django_extensions',
-    
+#    'django_cassandra_engine',
+
 ]
 
 MIDDLEWARE = [
@@ -95,7 +96,7 @@ DATABASES = {
 
 #DATABASES = {
 #    'default': {
-#        'ENGINE': 'mysql.connector.django', 
+#        'ENGINE': 'mysql.connector.django',
 #        'NAME': 'django',
 #        'USER': 'django',
 #        'PASSWORD': 'django',
@@ -142,4 +143,19 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+# Cassandra settings
 
+#DATABASES = {
+#    'default': {
+#        'ENGINE': 'django_cassandra_engine',
+#        'NAME': 'db',
+#        'TEST_NAME': 'test_db',
+#        'HOST': '172.17.0.2',
+#        'OPTIONS': {
+#            'replication': {
+#                'strategy_class': 'SimpleStrategy',
+#                'replication_factor': 1
+#            }
+#        }
+#    }
+#}

@@ -1,6 +1,7 @@
 #! /usr/bin/python
 # -*- coding: utf8 -*-
 
+
 import feedparser
 from buscador.models import Articulo, Periodico, Categoria
 from datetime import datetime
@@ -21,10 +22,10 @@ def categoria_act(RSS):
 		for NOTICIAS in scraping["items"] :
 			if "tags" in NOTICIAS.keys():
 				for tags in NOTICIAS["tags"] :
-					categoria = tags["term"]
+					categoria = str(tags['term'])
 					db_categorias = Categoria.objects.filter(nombre=categoria).values('nombre')
 					if len(db_categorias) < 1 :
-						insert = Categoria(nombre=categoria)
+						insert = Categoria(nombre=str(categoria))
 						insert.save()
 						print ("Nueva catagoria encontrada " )
 						print (categoria)
@@ -46,16 +47,13 @@ def articulos_act(RSS):
 		for NOTICIAS in scraping['items']:
 			if 'tags' in NOTICIAS.keys() :
 				FECHA = datetime.fromtimestamp(time.mktime(NOTICIAS['published_parsed']))
-				Arti_Search = Articulo.objects.filter(url=NOTICIAS['id'],fecha=FECHA).values('url')
+				Arti_Search = Articulo.objects.filter(url=NOTICIAS['url'],fecha=FECHA).values('url')
 				if len(Arti_Search) < 1 :
-					insert = Articulo (url = NOTICIAS['id'], titulo =NOTICIAS['title'],descripcion = NOTICIAS['summary'], author = NOTICIAS['author'], fecha=FECHA)
-					insert.Periodicos_id = (Periodico.objects.filter(nombre=DIARIO).values('id')[0]['id'])
+					tagss = []
 					for tags in NOTICIAS['tags']:
-						ca = Categoria.objects.filter(nombre=tags['term']).values('nombre')
-						insert.categoria.add(ca)
-					insert.save()
+						tagss.append(tags)
+					Articulo (categoria = (Categoria.objects.filter(nombre=tagss))  , url = str(NOTICIAS['url']), titulo = str(NOTICIAS['title']),descripcion = str(NOTICIAS['summary']), author = str(NOTICIAS['author']), fecha=FECHA)
 					print ("categoria Añadida")
-					
 					
 
 
