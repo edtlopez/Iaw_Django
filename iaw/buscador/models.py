@@ -6,7 +6,7 @@ from django.db import models
 # Create your models here.
 
 class Categoria (models.Model):
-	nombre = models.CharField(max_length=50)
+	nombre = models.CharField(max_length=50,unique=True)
 
 class Periodico (models.Model):
 	nombre = models.CharField(max_length=50)
@@ -14,7 +14,7 @@ class Periodico (models.Model):
 
 class Articulo (models.Model):
 	titulo = models.CharField(max_length=50)
-	url =  models.URLField(max_length=200)
+	url =  models.URLField(max_length=200,unique=True)
 	descripcion = models.URLField()
 	fecha = models.DateTimeField(auto_now_add=True, blank=True)
 	visitas = models.PositiveIntegerField()

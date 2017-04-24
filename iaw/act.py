@@ -12,6 +12,7 @@ RSS = {'elmundo' : 'http://estaticos.elmundo.es/elmundo/rss/portada.xml',
 'elpais' : 'http://ep00.epimg.net/rss/tags/ultimas_noticias.xml',
 'abc' : 'http://www.abc.es/rss/feeds/abcPortada.xml'
 
+
 }
 
 		
@@ -23,35 +24,44 @@ def periodicos_act(RSS) :
 			insert.save()
 			print ("Entrada Periodicos Añadida")
 	
-	
-def articulos_act(url):
+def act (url):
 	articulos = feedparser.parse(url)
-	for articulo in articulos['items']:
+	for articulo in articulos['items']:		
+		try:
+			aid = Articulo.objects.get(url=articulo['id'])
+		except : 
+			aid = Articulo(url = articulo['id'])		
+		
+		if not 'published_parsed' in articulo.keys():	
+			fecha = datetime.fromtimestamp(time.mktime(articulo['published_parsed']))
+		else:
+			fecha = datetime.fromtimestamp(time.mktime(time.localtime()))	
+		categorias=[]
 		if 'tags' in articulo.keys() :
-			if articulo['published_parsed'] != None :
-				fecha = datetime.fromtimestamp(time.mktime(articulo['published_parsed']))
-			else:
-				fecha = datetime.fromtimestamp(time.mktime(time.localtime()))
-				if Articulo.objects.filter(url=articulo['id']).values('url').count() < 1 :
-					categorias=[]
-					for tags in articulo['tags']:
-						a = Categoria(nombre=tags['term'])
-						a.save()
-						categorias.append(a)
-					insert = Articulo (visitas=0, url = articulo['id'], titulo = articulo['title'],descripcion = articulo['summary'], author = articulo['author'], fecha=fecha)
-					insert.periodico_id = Periodico.objects.filter(url=url).values('id')[0]['id']
-					insert.save()
-					insert.categoria.set(categorias)
-					print (articulo['id'])
-					print ('Articulo añadido')
-				else :
-					print (articulo['id'])
-					print ('El articulo ya existe')
+			for tags in articulo['tags']:
+				try:
+					a = Categoria(nombre=tags['term'])
+					a.save()
+				except:
+					a = Categoria.objects.get(nombre=tags['term'])
+				categorias.append(a)
+		
+		aid.visitas=0
+		aid.titulo = articulo['title']
+		aid.descripcion = articulo['summary']
+		aid.author = articulo['author']
+		aid.fecha = fecha
+		aid.periodico_id = Periodico.objects.filter(url=url).values('id')[0]['id']
+		aid.save()
 			
-				
+		if 'tags' in articulo.keys() :
+			try:
+				aid.categoria.set(categorias)
+			except:
+				pass
+			print ('OK')
 
-
-for P in Periodico.objects.values():
-	articulos_act(P['url'])
+for p in Periodico.objects.all().values('url'):
+	act(p['url'])
 	
 
