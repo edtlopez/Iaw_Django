@@ -25,7 +25,7 @@ SECRET_KEY = '9z0yt5bh&=l)hhj88g69g7ffnxsp@ex-=l#9b8a5hm1m*or3vi'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -41,7 +41,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'buscador',
     'django_extensions',
+#    'django.contrib.auth.context_processors.auth',
 #    'django_cassandra_engine',
+
 
 ]
 
@@ -159,3 +161,5 @@ STATIC_URL = '/static/'
 #        }
 #    }
 #}
+
+

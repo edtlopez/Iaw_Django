@@ -15,13 +15,20 @@ class Periodico (models.Model):
 class Articulo (models.Model):
 	titulo = models.CharField(max_length=50)
 	url =  models.URLField(max_length=200,unique=True)
-	descripcion = models.URLField()
+	descripcion = models.CharField(max_length=50)
 	fecha = models.DateTimeField(auto_now_add=True, blank=True)
 	visitas = models.PositiveIntegerField()
 	periodico = models.ForeignKey(Periodico)
 	categoria = models.ManyToManyField(Categoria)
 	author = models.CharField(max_length=50)
 
+
+#class Comentario (DjangoCassandraModel):
+#	id = columns.UUID(primary_key=True, default=uuid.uuid4)
+#	usuario_id = 
+#	articulo_id =
+#	comentario =
+	
 
 #class ExampleModel(DjangoCassandraModel):
 #    example_id    = columns.UUID(primary_key=True, default=uuid.uuid4)

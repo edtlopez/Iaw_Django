@@ -1,8 +1,10 @@
-from django.conf.urls import url
-from . import views
-from buscador.views import IndexView
+from django.conf.urls import url, include
+from buscador.views import *
 
 urlpatterns = [
-        url(r'^$', IndexView.get_queryset, name="Buscador"),
-        url(r'^resultado/$', IndexView.get_queryset),        
+		url(r'^articulo/(?P<id>[0-9]+)/$', ArticleDetailView.as_view(), name='article-detail'),
+		url('^', include('django.contrib.auth.urls')),
+        url(r'^$', Articulolist.as_view(),name='home'),   
+
 ]
+

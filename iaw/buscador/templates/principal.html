@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{%block contenido%}			
+	<div class="jumbotron">
+		<div class="container">
+			 <h2>Articulos</h2>
+	    <ul>
+    	    {% for publisher in object_list %}
+            <a href=""><li>{{ publisher.author }} / {{ publisher.titulo }}</li></a>
+        	{% endfor %}
+    	</ul>
+		</div>
+	</div>	
+{%endblock%}
