@@ -5,7 +5,8 @@
 			 <h2>Articulos</h2>
 	    <ul>
     	    {% for publisher in object_list %}
-            <a href=""><li>{{ publisher.author }} / {{ publisher.titulo }}</li></a>
+    	    {% url "article-detail" id=publisher.id as the_url %}
+            <a href="{{the_url}}"><li>{{ publisher.author }} / {{ publisher.titulo }}</li></a>
         	{% endfor %}
     	</ul>
 		</div>
