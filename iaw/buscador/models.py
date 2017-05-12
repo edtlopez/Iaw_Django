@@ -13,14 +13,14 @@ class Periodico (models.Model):
 	url =  models.URLField(max_length=200)
 
 class Articulo (models.Model):
-	titulo = models.CharField(max_length=50)
+	titulo = models.CharField(max_length=100)
 	url =  models.URLField(max_length=200,unique=True)
-	descripcion = models.CharField(max_length=50)
+	descripcion = models.CharField(max_length=1000)
 	fecha = models.DateTimeField(auto_now_add=True, blank=True)
 	visitas = models.PositiveIntegerField()
 	periodico = models.ForeignKey(Periodico)
 	categoria = models.ManyToManyField(Categoria)
-	author = models.CharField(max_length=50)
+	author = models.CharField(max_length=100)
 
 
 #class Comentario (DjangoCassandraModel):
