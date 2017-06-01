@@ -1,12 +1,18 @@
 from django.conf.urls import url, include
+from django.contrib.auth.decorators import login_required, permission_required
+from django.conf.urls.static import static
 from buscador.views import *
 
 urlpatterns = [
-		url(r'^articulo/(?P<id>[0-9]+)/$', ArticleDetailView.as_view(), name='article-detail'),
-		url(r'^articulo/edit/(?P<id>[0-9]+)/$',AuthorUpdate.as_view(),name="artedit"),
-		url(r'^articulo/del/(?P<id>[0-9]+)/$',ArticuloDelete.as_view(),name="artdel"),
+        url('',include('social.apps.django_app.urls', namespace='social')),
+		url(r'^articulo/(?P<pk>[0-9]+)/$', ArticleDetailView.as_view(), name='article-detail'),
+		url(r'^articulo/edit/(?P<pk>[0-9]+)/$',login_required(AuthorUpdate.as_view(),login_url="/login/"),name="artedit"),
+		url(r'^articulo/del/(?P<pk>[0-9]+)/$',login_required(permission_required(ArticuloDelete.as_view(), 'articulo_del', raise_exception=True),login_url="/login/"),name="artdel"),
 		url('^', include('django.contrib.auth.urls')),
-        url(r'^$', Articulolist.as_view(),name='home'), 
+        url(r'^$', Articulolist.as_view(),name='home'),
+         
+  		
+
 
 
 ]

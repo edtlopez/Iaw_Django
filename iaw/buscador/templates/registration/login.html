@@ -38,7 +38,8 @@
 
 {# Assumes you setup the password_reset view in your URLconf #}
 <p><a href="{% url 'password_reset' %}">Lost password?</a></p>
-
+<p><a class="navbar-brand" href="{% url "social:begin" "google-oauth2" %}">Google+</a></p>
+<p><a href="{% url 'home' %}">Create User</a></p>
 {% endblock %}
 
 </div></div></div>

@@ -1,19 +1,17 @@
 {% extends 'base.html' %}
 {%block contenido%}	
+{% load static %}
+{% url "like" pk=object.id as like_url %}
 
-<div class="jumbotron">
-		<div class="container">
-
-<h1>{{ object.titulo }}</h1>
-<p>{{ object.descripcion }}</p>
-<p>Reporter: {{ object.author }}</p>
-<p>Published: {{ object.fecha|date }}</p>
-<p>URL: <a href="{{ object.url }}"> {{ object.url }} </a> </p>
-<p>Visitas: {{ object.visitas }}</p>
-
-<p><a href="{% url "home" %}"> Pagina Principal </a> </p>
-
-</div>
-	</div>	
+		<div class="jumbotron">
+			<div class="container">
+				<h1>{{ object.titulo }}</h1>
+				<p>{{ object.descripcion }}</p>
+				<p>Reporter: {{ object.author }}</p>
+				<p>Published: {{ object.fecha|date }}</p>
+				<p>URL: <a href="{{ object.url }}"> {{ object.url }} </a> </p>
+				<!-- <p>Like: <a href="{{like_url}}"> <img height="42" width="42" src="{% static "Like.png" %}"> </a> </p> -->
+			</div>
+		</div>	
 
 {%endblock%}

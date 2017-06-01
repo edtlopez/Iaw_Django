@@ -41,8 +41,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'buscador',
     'django_extensions',
-#    'django.contrib.auth.context_processors.auth',
-#    'django_cassandra_engine',
+    'social.apps.django_app.default',
+ 
 
 
 ]
@@ -78,6 +78,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'social.apps.django_app.context_processors.backends',
+                'social.apps.django_app.context_processors.login_redirect',
             ],
         },
     },
@@ -162,4 +164,14 @@ STATIC_URL = '/static/'
 #    }
 #}
 
+AUTHENTICATION_BACKENDS = (
+   'social.backends.google.GoogleOAuth2',
+   'django.contrib.auth.backends.ModelBackend',
+)
 
+
+
+LOGIN_REDIRECT_URL = '/'
+SOCIAL_AUTH_URL_NAMESPACE = 'social'
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY =  "917028637658-rbvdqn37f5f9s0sggmm7nf6t6cm1pn7k.apps.googleusercontent.com"
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = "dNGYqPBv5wmlWxFXmmgk-NsD"
