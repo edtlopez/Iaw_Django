@@ -46,3 +46,7 @@ class Command (BaseCommand):
 					except:
 						pass
 					print ('OK')
+
+
+	def Periodicosact () :
+		pass

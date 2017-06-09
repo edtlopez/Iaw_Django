@@ -10,30 +10,30 @@ from django.contrib import admin
 #from django_cassandra_engine.models import DjangoCassandraModel
 
 # Create your models here.
-#@admin.register(Categoria)
+
 class Categoria (models.Model):
 	nombre = models.CharField(max_length=50,unique=True)
 
-#@admin.register(Periodico)
+
 class Periodico (models.Model):
 	nombre = models.CharField(max_length=50)
 	url =  models.URLField(max_length=200)
 
-#@admin.register(Articulo)
+
 class Articulo (models.Model):
-	titulo = models.CharField(max_length=100)
+	titulo = models.CharField(max_length=1000)
 	url =  models.URLField(max_length=200,unique=True)
 	descripcion = models.CharField(max_length=1000)
 	fecha = models.DateTimeField(auto_now_add=True, blank=True)
 	periodico = models.ForeignKey(Periodico)
 	categoria = models.ManyToManyField(Categoria)
-	author = models.CharField(max_length=100)
+	author = models.CharField(max_length=1000)
 
-class userextension (models.Model):
-	user = models.OneToOneField(User, on_delete=models.CASCADE)
-	fecha_nacimiento = models.DateTimeField(auto_now_add=True, blank=True)
-	pregunta_secreta =  models.CharField(max_length=100)
-	respueste_secreta =  models.CharField(max_length=100)
+#class userextension (models.Model):
+#	user = models.OneToOneField(User, on_delete=models.CASCADE)
+#	fecha_nacimiento = models.DateTimeField(auto_now_add=True, blank=True)
+#	pregunta_secreta =  models.CharField(max_length=1000)
+#	respueste_secreta =  models.CharField(max_length=1000)
 
 @admin.register(Articulo)
 class ArticuloAdmin(admin.ModelAdmin):
